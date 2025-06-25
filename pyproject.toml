@@ -1,0 +1,14 @@
+[project]
+name = "ddal-ggak-sejong-udream"
+version = "0.1.0"
+description = "세종대학교 유드림 현장실습 보고서 자동화 딸-깍"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "asyncio>=3.4.3",
+    "dotenv>=0.9.9",
+    "openai>=1.91.0",
+    "playwright>=1.52.0",
+    "pydantic>=2.11.7",
+    "streamlit>=1.46.0",
+]
