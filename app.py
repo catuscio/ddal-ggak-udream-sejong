@@ -140,6 +140,7 @@ if st.button("저장 및 자동 제출"):
                 
                 if success_count == total_count:
                     st.success(f"🎉 모든 보고서 제출 완료! ({success_count}/{total_count})")
+                    st.link_button("📰보고서 보러 가기", "https://udream.sejong.ac.kr/Career/tcp/Rpt.aspx")
                 else:
                     st.warning(f"⚠️ 일부 보고서 제출 실패 ({success_count}/{total_count})")
             

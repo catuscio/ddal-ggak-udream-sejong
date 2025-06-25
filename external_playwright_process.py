@@ -4,72 +4,13 @@ import ast
 import os
 import re
 import traceback
+import json_repair
 from dotenv import load_dotenv
 load_dotenv()
 
 from playwright.sync_api import sync_playwright
 from llm import OpenRouterClient
 from report_submitter import ReportSubmitter
-
-def safe_parse_llm_response(response_text):
-    """LLM 응답을 안전하게 파싱하는 함수 (모든 형태 지원)"""
-    try:
-        cleaned = response_text.strip()
-        
-        # 다양한 백틱 패턴들을 순서대로 시도 (수정됨)
-        patterns = [
-            r'``````',      # ``````
-            r'``````',          # ``````
-            r'`(.*?)`',                    # ` ... `
-        ]
-        
-        extracted = False
-        for pattern in patterns:
-            match = re.search(pattern, cleaned, re.DOTALL)
-            if match:
-                print(f"DEBUG: 패턴 매치: {pattern}")
-                cleaned = match.group(1).strip()
-                extracted = True
-                break
-        
-        # 파싱 시도 순서
-        parsing_methods = [
-            ("json.loads", lambda x: json.loads(x)),
-            ("ast.literal_eval", lambda x: ast.literal_eval(x)),
-            ("json.loads (quote fix)", lambda x: json.loads(x.replace("'", '"'))),
-        ]
-        
-        for method_name, method_func in parsing_methods:
-            try:
-                result = method_func(cleaned)
-                print(f"DEBUG: {method_name} 성공")
-                return result
-            except Exception as e:
-                print(f"DEBUG: {method_name} 실패: {e}")
-        
-        # 마지막 수단: 수동 리스트 추출
-        start_idx = cleaned.find('[')
-        end_idx = cleaned.rfind(']')
-        
-        if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
-            list_part = cleaned[start_idx:end_idx + 1]
-            print(f"DEBUG: 리스트 부분 추출: {list_part[:100]}...")
-            
-            for method_name, method_func in parsing_methods:
-                try:
-                    result = method_func(list_part)
-                    print(f"DEBUG: 리스트 파싱 성공 ({method_name})")
-                    return result
-                except Exception as e:
-                    print(f"DEBUG: 리스트 파싱 실패 ({method_name}): {e}")
-                    continue
-        
-        raise ValueError(f"모든 파싱 방법 실패")
-        
-    except Exception as e:
-        print(f"ERROR: 파싱 실패 - {str(e)}")
-        print(f"ERROR: 원본 텍스트 (처음 500자): {response_text[:500]}...")
-        raise
 
 
 def main():
@@ -101,7 +42,7 @@ def main():
         
         print("LLM 응답 파싱 중...", file=sys.stderr)
         # 파싱
-        report_data = safe_parse_llm_response(reports)
+        report_data = json_repair.loads(reports)
         
         print(f"생성된 보고서 수: {len(report_data) if isinstance(report_data, list) else 'Unknown'}", file=sys.stderr)
         

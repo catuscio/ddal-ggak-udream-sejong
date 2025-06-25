@@ -117,7 +117,7 @@ class ReportSubmitter:
             submit_button.click()
             
             # 제출 후 결과 확인
-            self.page.wait_for_timeout(3000)
+            self.page.wait_for_timeout(1000)
             print(f"{date} 완료")
             return True
             

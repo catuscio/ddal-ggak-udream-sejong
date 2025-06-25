@@ -135,6 +135,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "asyncio" },
     { name = "dotenv" },
+    { name = "json-repair" },
     { name = "openai" },
     { name = "playwright" },
     { name = "pydantic" },
@@ -145,6 +146,7 @@ dependencies = [
 requires-dist = [
     { name = "asyncio", specifier = ">=3.4.3" },
     { name = "dotenv", specifier = ">=0.9.9" },
+    { name = "json-repair", specifier = ">=0.47.3" },
     { name = "openai", specifier = ">=1.91.0" },
     { name = "playwright", specifier = ">=1.52.0" },
     { name = "pydantic", specifier = ">=2.11.7" },
@@ -311,6 +313,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/d8/b3/2bd02071c5a2430d0b70403a34411fc519c2f227da7b03da9ba6a956f931/jiter-0.10.0-cp314-cp314-win32.whl", hash = "sha256:ac509f7eccca54b2a29daeb516fb95b6f0bd0d0d8084efaf8ed5dfc7b9f0b357", size = 210127, upload-time = "2025-05-18T19:04:38.837Z" },
     { url = "https://files.pythonhosted.org/packages/03/0c/5fe86614ea050c3ecd728ab4035534387cd41e7c1855ef6c031f1ca93e3f/jiter-0.10.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:5ed975b83a2b8639356151cef5c0d597c68376fc4922b45d0eb384ac058cfa00", size = 318527, upload-time = "2025-05-18T19:04:40.612Z" },
     { url = "https://files.pythonhosted.org/packages/b3/4a/4175a563579e884192ba6e81725fc0448b042024419be8d83aa8a80a3f44/jiter-0.10.0-cp314-cp314t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3aa96f2abba33dc77f79b4cf791840230375f9534e5fac927ccceb58c5e604a5", size = 354213, upload-time = "2025-05-18T19:04:41.894Z" },
+]
+
+[[package]]
+name = "json-repair"
+version = "0.47.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/42/1b/13f80ab76f81552f201fa1e5147d21b2c2c496927665b88ab37e67c185af/json_repair-0.47.3.tar.gz", hash = "sha256:030d036db0e4f7896cfc422dd47e7022c0942ffe14d8d7cd6b1b1abd40f6636a", size = 33863, upload-time = "2025-06-24T04:36:45.219Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0d/20/3beb965d1731ce35e1b1392b4e357fa5ef2ffc14402d28b3c2ef47ff893c/json_repair-0.47.3-py3-none-any.whl", hash = "sha256:a35c909f1b2f4a9bbf5453bc4f60cc173728f394700500ad859feb47914550f5", size = 22449, upload-time = "2025-06-24T04:36:43.957Z" },
 ]
 
 [[package]]
